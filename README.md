@@ -1,6 +1,6 @@
 # Master Shopping List
 
-React app to create and manage shopping lists. Simple UI. Local persistence.
+This React app is intended to create and manage shopping lists. Simple UI. Local persistence.
 
 ## Stack
 
