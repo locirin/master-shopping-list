@@ -151,7 +151,7 @@ export default function CategoriesConfig({
           Delete Selected{selectedIds.length ? ` (${selectedIds.length})` : ""}
         </Button>
         <Button disabled={selectedIds.length === 0} onClick={handleToggleShow}>
-          Toggle “Show in Dropdown”
+          Show in Dropdown
           {selectedIds.length ? ` (${selectedIds.length})` : ""}
         </Button>
       </div>
@@ -161,14 +161,86 @@ export default function CategoriesConfig({
           <li style={{ color: "#666" }}>No categories yet.</li>
         ) : (
           categories.map((c) => (
+            // <li
+            //   key={c.id}
+            //   style={{
+            //     marginBottom: "0.5rem",
+            //     padding: "0.5rem",
+            //     borderRadius: "6px",
+            //     background: "var(--surface)",
+            //     border: "1px solid var(--border)",
+            //   }}
+            // >
+            //   <input
+            //     type="checkbox"
+            //     aria-label={`Select category ${c.name}`}
+            //     checked={selectedIds.includes(c.id)}
+            //     onChange={() => toggleSelect(c.id)}
+            //     style={{ marginRight: "0.5rem" }}
+            //   />
+
+            //   {editingId === c.id ? (
+            //     <input
+            //       type="text"
+            //       value={editName}
+            //       onChange={(e) => setEditName(e.target.value)}
+            //       onBlur={() => handleEditCategory(c.id, editName)}
+            //       onKeyDown={(e) => {
+            //         if (e.key === "Enter") handleEditCategory(c.id, editName);
+            //         if (e.key === "Escape") {
+            //           setEditingId(null);
+            //           setEditName("");
+            //         }
+            //       }}
+            //       autoFocus
+            //       style={{ marginRight: "0.5rem", padding: "0.25rem" }}
+            //     />
+            //   ) : (
+            //     <strong
+            //       style={{
+            //         cursor: "pointer",
+            //         textDecoration: "underline",
+            //         color: "var(--text)",
+            //         textDecorationColor: "var(--primary)",
+            //       }}
+            //       onClick={() => {
+            //         setEditingId(c.id);
+            //         setEditName(c.name);
+            //       }}
+            //       title="Click to edit"
+            //     >
+            //       {c.name}
+            //     </strong>
+            //   )}
+
+            //   <span
+            //     style={{
+            //       marginLeft: 8,
+            //       color: "var(--muted)",
+            //       fontWeight: 600,
+            //     }}
+            //   >
+            //     {c.showInDropdown ? "• in dropdown" : "• hidden"}
+            //   </span>
+            //   <Button
+            //     style={{ marginLeft: "0.5rem" }}
+            //     onClick={() => onToggleShowInDropdown([c.id])}
+            //   >
+            //     {c.showInDropdown ? "Hide from dropdown" : "Show in dropdown"}
+            //   </Button>
+            // </li>
             <li
               key={c.id}
               style={{
-                marginBottom: "0.5rem",
-                padding: "0.5rem",
+                display: "grid",
+                gridTemplateColumns: "auto 1fr auto auto",
+                alignItems: "center",
+                gap: "0.75rem",
+                padding: "0.5rem 0.75rem",
                 borderRadius: "6px",
                 background: "var(--surface)",
                 border: "1px solid var(--border)",
+                marginBottom: "0.5rem",
               }}
             >
               <input
@@ -176,7 +248,6 @@ export default function CategoriesConfig({
                 aria-label={`Select category ${c.name}`}
                 checked={selectedIds.includes(c.id)}
                 onChange={() => toggleSelect(c.id)}
-                style={{ marginRight: "0.5rem" }}
               />
 
               {editingId === c.id ? (
@@ -193,7 +264,7 @@ export default function CategoriesConfig({
                     }
                   }}
                   autoFocus
-                  style={{ marginRight: "0.5rem", padding: "0.25rem" }}
+                  style={{ padding: "0.25rem" }}
                 />
               ) : (
                 <strong
@@ -213,18 +284,13 @@ export default function CategoriesConfig({
                 </strong>
               )}
 
-              <span
-                style={{
-                  marginLeft: 8,
-                  color: "var(--muted)",
-                  fontWeight: 600,
-                }}
-              >
+              <span style={{ color: "var(--muted)", fontWeight: 600 }}>
                 {c.showInDropdown ? "• in dropdown" : "• hidden"}
               </span>
+
               <Button
-                style={{ marginLeft: "0.5rem" }}
                 onClick={() => onToggleShowInDropdown([c.id])}
+                style={{ width: "10rem" }}
               >
                 {c.showInDropdown ? "Hide from dropdown" : "Show in dropdown"}
               </Button>

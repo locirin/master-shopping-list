@@ -31,17 +31,21 @@ export default function CreateList({ onCreateList }) {
         />
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Button type="submit" size="xs">
-          Save Shopping List
-        </Button>
-        <Button
-          type="button"
-          onClick={() => navigate("/")}
-          size="xs"
-          style={{ marginLeft: "0.5rem" }}
+        <div
+          style={{ display: "inline-flex", gap: "0.5rem", marginTop: "0.5rem" }}
         >
-          Cancel
-        </Button>
+          <Button type="submit" size="xs" style={{ width: "auto" }}>
+            Save
+          </Button>
+          <Button
+            type="button"
+            onClick={() => navigate("/")}
+            size="xs"
+            style={{ width: "auto" }}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </section>
   );
