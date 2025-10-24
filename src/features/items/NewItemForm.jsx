@@ -1,11 +1,17 @@
 import { useState } from "react";
 import Button from "../../shared/Button.jsx";
 
-export default function NewItemForm({ onCreate }) {
+export default function NewItemForm({
+  onCreate,
+  categories = [],
+  onAddCategory,
+}) {
   const [name, setName] = useState("");
   const [qty, setQty] = useState(1);
-  const [unit, setUnit] = useState("");
   const [error, setError] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [showNewCat, setShowNewCat] = useState(false);
+  const [newCatName, setNewCatName] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,10 +25,13 @@ export default function NewItemForm({ onCreate }) {
       setError("Quantity must be 0 or more");
       return;
     }
-    onCreate({ name: trimmed, quantity: n, unit: unit.trim() });
+    onCreate({
+      name: trimmed,
+      quantity: n,
+      categoryId: categoryId || undefined,
+    });
     setName("");
     setQty(1);
-    setUnit("");
     setError("");
   }
 
@@ -46,15 +55,52 @@ export default function NewItemForm({ onCreate }) {
         onChange={(e) => setQty(e.target.value)}
         style={{ width: "5rem", marginRight: "0.5rem" }}
       />
-      <label htmlFor="item-unit">Unit</label>{" "}
-      <input
-        id="item-unit"
-        type="text"
-        value={unit}
-        onChange={(e) => setUnit(e.target.value)}
-        placeholder="L, kg, pcs"
-        style={{ width: "6rem", marginRight: "0.5rem" }}
-      />
+      <select
+        value={categoryId}
+        onChange={(e) => {
+          const val = e.target.value;
+          if (val === "__new__") {
+            setShowNewCat(true);
+            setCategoryId("");
+          } else {
+            setShowNewCat(false);
+            setCategoryId(val);
+          }
+        }}
+        style={{ marginRight: "0.5rem" }}
+      >
+        <option value="">No category</option>
+        {categories.map((c) => (
+          <option key={c.id} value={c.id}>
+            {c.name}
+          </option>
+        ))}
+        {onAddCategory && <option value="__new__">+ New category…</option>}
+      </select>
+      {showNewCat && onAddCategory && (
+        <>
+          <input
+            type="text"
+            value={newCatName}
+            onChange={(e) => setNewCatName(e.target.value)}
+            placeholder="Category name"
+            style={{ marginRight: "0.5rem" }}
+          />
+          <Button
+            type="button"
+            onClick={() => {
+              const t = newCatName.trim();
+              if (!t) return;
+              onAddCategory(t);
+              setNewCatName("");
+              setShowNewCat(false);
+              // user can now pick it from the dropdown
+            }}
+          >
+            Add
+          </Button>
+        </>
+      )}
       <Button type="submit">Add Item</Button>
       {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
     </form>

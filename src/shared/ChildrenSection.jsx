@@ -1,7 +1,7 @@
 export default function ChildrenSection({ title, children }) {
   return (
-    <section style={{ padding: "1rem" }}>
-      {title ? <h2>{title}</h2> : null}
+    <section className="children-section" style={{ padding: "0.75rem 1rem" }}>
+      {title ? <h2 className="section-title">{title}</h2> : null}
       {children}
     </section>
   );
