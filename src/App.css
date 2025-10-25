@@ -253,11 +253,7 @@ form button {
   vertical-align: middle;
 }
 
-form button {
-  padding: 0.22rem 0.5rem;
-  font-size: 0.9rem;
-  line-height: 1.1;
-}
+
 form input,
 form textarea {
   font-size: 0.95rem;
@@ -297,7 +293,7 @@ body {
   overflow-x: hidden;
 }
 
-form input[type="text"],
+/* form input[type="text"],
 form input[type="number"],
 form select,
 form button,
@@ -305,7 +301,29 @@ form textarea {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+} */
+
+/* --- Normalize form control height --- */
+form input[type="text"],
+form input[type="number"],
+form select,
+form button,
+form textarea {
+  height: 2rem; 
+  line-height: 1.1;
+  padding: 0.25rem 0.45rem; 
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  vertical-align: middle;
 }
+
+
+form button[type="submit"] {
+  width: auto;
+  min-width: fit-content;
+  padding: 0.25rem 0.6rem;
+}
+
 
 .row,
 li {

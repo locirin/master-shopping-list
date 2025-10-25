@@ -52,8 +52,8 @@ export default function Header({ theme, onCycleTheme, appliedTheme }) {
         <NavLink to="/about" style={linkStyle}>
           About
         </NavLink>
-        <NavLink to="/contact" style={linkStyle}>
-          Contact
+        <NavLink to="/notes" style={linkStyle}>
+          Notes
         </NavLink>
 
         <button

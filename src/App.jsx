@@ -9,7 +9,7 @@ import Header from "./shared/Header.jsx";
 import Footer from "./shared/Footer.jsx";
 import CreateList from "./pages/CreateList.jsx";
 import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
+import Notes from "./pages/Notes.jsx";
 import CategoriesConfig from "./pages/CategoriesConfig.jsx";
 import Button from "./shared/Button.jsx";
 
@@ -264,7 +264,7 @@ export default function App() {
             element={<CreateList onCreateList={addList} />}
           />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/notes" element={<Notes />} />
 
           <Route
             path="/categories"

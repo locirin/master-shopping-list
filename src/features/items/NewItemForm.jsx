@@ -36,7 +36,10 @@ export default function NewItemForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ marginTop: "1rem", maxWidth: "360px" }}
+    >
       <label htmlFor="item-name">Item</label>{" "}
       <input
         id="item-name"
@@ -44,9 +47,9 @@ export default function NewItemForm({
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="e.g., Milk"
-        style={{ marginRight: "0.5rem" }}
+        style={{ width: "100%", maxWidth: "360px", marginBottom: "0.5rem" }}
       />
-      <label htmlFor="item-qty">Qty</label>{" "}
+      {/* <label htmlFor="item-qty">Qty</label>{" "}
       <input
         id="item-qty"
         type="number"
@@ -76,7 +79,49 @@ export default function NewItemForm({
           </option>
         ))}
         {onAddCategory && <option value="__new__">+ New category…</option>}
-      </select>
+      </select> */}
+      <div
+        style={{
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center",
+          marginBottom: "0.5rem",
+        }}
+      >
+        <label htmlFor="item-qty" style={{ whiteSpace: "nowrap" }}>
+          Qty
+        </label>
+        <input
+          id="item-qty"
+          type="number"
+          min="0"
+          value={qty}
+          onChange={(e) => setQty(e.target.value)}
+          style={{ width: "5rem" }}
+        />
+        <select
+          value={categoryId}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (val === "__new__") {
+              setShowNewCat(true);
+              setCategoryId("");
+            } else {
+              setShowNewCat(false);
+              setCategoryId(val);
+            }
+          }}
+          style={{ flex: 1 }}
+        >
+          <option value="">No category</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+          {onAddCategory && <option value="__new__">+ New category…</option>}
+        </select>
+      </div>
       {showNewCat && onAddCategory && (
         <>
           <input
@@ -101,7 +146,17 @@ export default function NewItemForm({
           </Button>
         </>
       )}
-      <Button type="submit">Add Item</Button>
+      <Button
+        type="submit"
+        size="xs"
+        style={{
+          width: "auto",
+          padding: "0.25rem 0.6rem",
+          minWidth: "fit-content",
+        }}
+      >
+        Add Item
+      </Button>
       {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
     </form>
   );
